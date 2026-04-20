@@ -1,0 +1,131 @@
+@use "../common/variables" as *;
+@use "../common/mixins" as *;
+
+.summary {
+  &-inner {
+    @include inner-container($max-width-wide);
+    padding: 30px 20px;
+
+    @include respond($bp-md) {
+      padding: 50px 30px;
+    }
+
+    @include respond($bp-xl) {
+      padding: 50px 0;
+    }
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    @include list-reset;
+
+    @include respond($bp-sm) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+  }
+
+  &-item {
+    @include respond($bp-sm) {
+      width: 50%;
+      flex: none;
+      margin-bottom: 30px;
+    }
+
+    @include respond($bp-lg) {
+      flex: 1;
+      width: auto;
+      margin-bottom: 0;
+    }
+
+    &::before {
+      display: block;
+      height: 40px;
+      margin-bottom: 10px;
+      content: '';
+
+      @include respond($bp-md) {
+        height: 50px;
+      }
+    }
+
+    &:first-child {
+      &::before {
+        width: 66px;
+        background: url("../../assets/images/title_number01_outline.svg") no-repeat center left / contain;
+      }
+
+      &:hover::before {
+        background: url("../../assets/images/title_number01_filled.svg") no-repeat center left / contain;
+      }
+    }
+
+    &:nth-child(2) {
+      &::before {
+        width: 80px;
+        background: url("../../assets/images/title_number02_outline.svg") no-repeat center left / contain;
+      }
+
+      &:hover::before {
+        background: url("../../assets/images/title_number02_filled.svg") no-repeat center left / contain;
+      }
+    }
+
+    &:nth-child(3) {
+      &::before {
+        width: 78px;
+        background: url("../../assets/images/title_number03_outline.svg") no-repeat center left / contain;
+      }
+
+      &:hover::before {
+        background: url("../../assets/images/title_number03_filled.svg") no-repeat center left / contain;
+      }
+    }
+
+    &:nth-child(4) {
+      &::before {
+        width: 86px;
+        background: url("../../assets/images/title_number04_outline.svg") no-repeat center left / contain;
+      }
+
+      &:hover::before {
+        background: url("../../assets/images/title_number04_filled.svg") no-repeat center left / contain;
+      }
+    }
+
+    &-title {
+      display: block;
+      text-transform: uppercase;
+      font-size: 24px;
+      margin-bottom: 15px;
+
+      @include respond($bp-md) {
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &-sub {
+    &-list {
+      @include list-reset;
+    }
+
+    &-item {
+      @include line-prefix;
+      font-size: 13px;
+      color: var(--color-text-light);
+
+      @include respond($bp-md) {
+        font-size: 14px;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

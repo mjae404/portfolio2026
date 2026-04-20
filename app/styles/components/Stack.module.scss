@@ -1,0 +1,129 @@
+@use "../common/variables" as *;
+@use "../common/mixins" as *;
+
+.stack {
+  &-inner {
+    @include inner-container;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    @include respond($bp-lg) {
+      flex-direction: row;
+      align-items: center;
+      gap: $inner-gap;
+    }
+  }
+
+  &-image {
+    &-container {
+      width: 100%;
+      @include image-reveal;
+
+      @include respond($bp-lg) {
+        @include flex-half;
+      }
+    }
+
+    &-presentation {
+      @include image-responsive;
+    }
+  }
+
+  &-text {
+    &-container {
+      width: 100%;
+
+      @include respond($bp-lg) {
+        @include flex-half;
+      }
+    }
+  }
+
+  &-list {
+    @include list-reset;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    display: flex;
+
+    @include respond($bp-md) {
+      margin-bottom: 50px;
+    }
+  }
+
+  &-item {
+    padding: 3px 12px;
+    border: 1px dashed var(--color-text);
+    border-radius: 50px;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    font-size: 13px;
+
+    @include respond($bp-md) {
+      padding: 3px 15px;
+      font-size: 14px;
+    }
+
+    &:not(:last-child) {
+      margin: 10px 10px 0 0;
+    }
+
+    &:last-child {
+      margin-top: 10px;
+    }
+  }
+
+  &-detail {
+    &-list {
+      margin: 0;
+    }
+
+    &-item {
+      @include detail-item-separator;
+    }
+
+    &-title {
+      font-size: 18px;
+      margin-bottom: 15px;
+      font-family: $font-pretendard;
+      font-weight: 300;
+      font-style: italic;
+      display: inline-block;
+      position: relative;
+      padding-right: 15px;
+      box-sizing: border-box;
+
+      @include respond($bp-md) {
+        font-size: 20px;
+      }
+
+      &::after {
+        @include position(absolute, $right: 0, $bottom: 5px);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $color-dot;
+        content: '';
+      }
+    }
+
+    &-description {
+      margin: 0;
+      font-size: 14px;
+      padding-left: 15px;
+      position: relative;
+
+      &::before {
+        @include position(absolute, $top: 10px, $left: 0);
+        width: 10px;
+        height: 1px;
+        background-color: var(--color-text);
+        content: '';
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

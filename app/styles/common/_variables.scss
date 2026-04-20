@@ -1,0 +1,28 @@
+// Colors
+$color-accent: #b34831;
+$color-text-white: #fff;
+$color-dot: #f35626;
+$color-dot-separator: #666;
+$color-bg-overlay: rgba(0, 0, 0, .5);
+$color-bg-placeholder: #ccc;
+
+// Breakpoints
+$bp-sm: 576px;
+$bp-md: 768px;
+$bp-lg: 992px;
+$bp-xl: 1200px;
+
+// Layout
+$max-width: 1200px;
+$max-width-wide: 1280px;
+$header-height: 90px;
+$header-height-mobile: 60px;
+$inner-gap: 50px;
+
+// Font
+$font-pretendard: 'Pretendard', sans-serif;
+
+// Transition
+$transition-default: all .4s;
+$transition-slow: all .5s ease-in-out .1s;
+$transition-overlay: all 2.5s ease-out;

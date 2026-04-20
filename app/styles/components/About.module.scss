@@ -1,0 +1,157 @@
+@use "../common/variables" as *;
+@use "../common/mixins" as *;
+
+.about {
+  &-inner {
+    @include inner-container;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    @include respond($bp-lg) {
+      flex-direction: row;
+      align-items: center;
+      gap: $inner-gap;
+    }
+  }
+
+  &-image {
+    &-container {
+      width: 100%;
+      @include image-reveal;
+
+      @include respond($bp-lg) {
+        @include flex-half;
+      }
+    }
+
+    &-presentation {
+      @include image-responsive;
+    }
+  }
+
+  &-text {
+    &-container {
+      width: 100%;
+
+      @include respond($bp-lg) {
+        @include flex-half;
+      }
+    }
+
+    &-title {
+      &-list {
+        display: flex;
+        align-items: center;
+        @include list-reset;
+        margin-bottom: 10px;
+      }
+
+      &-item {
+        font-size: 14px;
+
+        @include respond($bp-md) {
+          font-size: inherit;
+        }
+
+        &:not(:last-child) {
+          margin-right: 16px;
+          position: relative;
+
+          @include respond($bp-md) {
+            margin-right: 21px;
+          }
+
+          &::after {
+            @include position(absolute, $top: 5px, $right: -8px);
+            display: block;
+            width: 1px;
+            height: 15px;
+            background-color: var(--color-text);
+            content: '';
+
+            @include respond($bp-md) {
+              right: -10px;
+            }
+          }
+        }
+      }
+    }
+
+    &-description {
+      margin: 0 0 25px 0;
+      font-size: 14px;
+
+      @include respond($bp-md) {
+        margin-bottom: 35px;
+      }
+    }
+  }
+
+  &-detail {
+    &-list {
+      margin: 0;
+    }
+
+    &-item {
+      position: relative;
+      font-size: 14px;
+      @include detail-item-separator;
+    }
+
+    &-title {
+      display: inline-block;
+      border-bottom: 1px solid var(--color-text);
+      position: static;
+      margin-bottom: 10px;
+
+      @include respond($bp-md) {
+        @include position(absolute, $top: 0, $left: 0);
+        margin-bottom: 0;
+      }
+    }
+
+    &-description {
+      margin: 0;
+      padding-left: 0;
+
+      @include respond($bp-md) {
+        padding-left: 130px;
+      }
+
+      &:not(:last-child) {
+        margin: 0 0 10px 0;
+      }
+
+      &-date {
+        @include date-text;
+        font-size: 14px;
+
+        @include respond($bp-md) {
+          font-size: 16px;
+        }
+      }
+
+      &-title {
+        font-size: 16px;
+        font-weight: 700;
+
+        @include respond($bp-md) {
+          font-size: 18px;
+        }
+      }
+
+      &-info {
+        color: var(--color-text-light);
+        font-size: 13px;
+        font-weight: 400;
+        margin-left: 5px;
+
+        &.organized {
+          display: block;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

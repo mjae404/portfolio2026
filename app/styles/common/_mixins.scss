@@ -1,0 +1,153 @@
+@use "variables" as *;
+
+@mixin respond($bp) {
+  @media screen and (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin inner-container($width: $max-width) {
+  max-width: $width;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+
+  @include respond($bp-md) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @include respond($bp-xl) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@mixin flex-half {
+  flex: 1;
+  width: 50%;
+}
+
+@mixin image-responsive {
+  width: 100%;
+  height: auto;
+}
+
+@mixin list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin button-reset {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+@mixin detail-item-separator($padding: 20px, $margin: 20px) {
+  &:not(:last-child) {
+    padding-bottom: $padding;
+    margin-bottom: $margin;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin line-clamp($lines, $line-height) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  line-height: $line-height;
+  max-height: ($line-height * $lines);
+}
+
+@mixin date-text {
+  display: block;
+  color: $color-accent;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
+@mixin dot-separator($gap: 12px, $color: $color-dot-separator) {
+  &:not(:last-child) {
+    margin-right: $gap;
+    position: relative;
+
+    &::after {
+      background-color: $color;
+      border-radius: 50%;
+      display: block;
+      height: 2px;
+      @include position(absolute, $top: 50%, $right: calc(-1 * (#{$gap} / 2 + 1px)));
+      transform: translateY(-50%);
+      width: 2px;
+      content: '';
+    }
+  }
+}
+
+@mixin image-reveal {
+  filter: grayscale(100%);
+  transform: scale(.8) rotate(5deg);
+  transition: filter 1s, transform 1s;
+
+  &.animate {
+    filter: none;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@mixin line-prefix($width: 10px) {
+  position: relative;
+  padding-left: #{$width + 10px};
+
+  &::before {
+    content: '';
+    display: block;
+    @include position(absolute, $top: 50%, $left: 0);
+    transform: translateY(-50%);
+    width: $width;
+    height: 1px;
+    background-color: var(--color-text);
+  }
+}
+
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+  position: $position;
+
+  @if $top != null {
+    top: $top;
+  }
+
+  @if $right != null {
+    right: $right;
+  }
+
+  @if $bottom != null {
+    bottom: $bottom;
+  }
+
+  @if $left != null {
+    left: $left;
+  }
+}
+
+@mixin blind {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}

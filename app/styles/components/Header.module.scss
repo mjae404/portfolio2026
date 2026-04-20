@@ -1,0 +1,224 @@
+@use "../common/variables" as *;
+@use "../common/mixins" as *;
+
+.header {
+  border-bottom: 1px solid var(--color-border-header);
+  @include position(fixed, $top: 0, $left: 0);
+  width: 100%;
+  z-index: 100;
+  height: $header-height-mobile;
+  background-color: transparent;
+  backdrop-filter: blur(0);
+  transition: all .4s;
+  box-sizing: border-box;
+
+  @include respond($bp-md) {
+    height: $header-height;
+  }
+
+  &.active {
+    backdrop-filter: blur(10px);
+    background-color: var(--color-header-active-bg, hsla(0, 0%, 100%, .2));
+
+    :global([data-theme="dark"]) & {
+      background-color: hsla(0, 0%, 7%, .6);
+    }
+  }
+
+  &-inner {
+    @include inner-container;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 100%;
+
+    @include respond($bp-md) {
+      padding: 20px 30px;
+    }
+
+    @include respond($bp-xl) {
+      padding: 20px 0;
+    }
+  }
+
+  &-menu-button {
+    @include button-reset;
+
+    img {
+      width: 70px;
+      height: auto;
+
+      @include respond($bp-md) {
+        width: 100px;
+      }
+    }
+
+    :global([data-theme="dark"]) & img {
+      filter: invert(1);
+    }
+  }
+
+  &-hamburger {
+    @include button-reset;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+
+    @include respond($bp-md) {
+      display: none;
+    }
+
+    :global([data-theme="dark"]) & img {
+      filter: invert(1);
+    }
+  }
+
+  &-nav {
+    margin-left: auto;
+    @include position(fixed, $top: 0, $left: 0);
+    width: 100svw;
+    height: 100svh;
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s, visibility .3s;
+
+    &-open {
+      z-index: 200;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @include respond($bp-md) {
+      position: static;
+      width: auto;
+      height: auto;
+      background-color: transparent;
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      flex-direction: row;
+      transition: none;
+    }
+
+    &-close {
+      @include button-reset;
+      @include position(absolute, $top: 16px, $right: 20px);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include respond($bp-md) {
+        display: none;
+      }
+
+      :global([data-theme="dark"]) & img {
+        filter: invert(1);
+      }
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      margin: 0;
+      list-style: none;
+      padding: 0;
+
+      @include respond($bp-md) {
+        flex-direction: row;
+        gap: 0;
+      }
+    }
+
+    &-item {
+      @include respond($bp-md) {
+        &:not(:last-child) {
+          margin-right: 35px;
+        }
+      }
+
+      @include respond($bp-lg) {
+        &:not(:last-child) {
+          margin-right: 50px;
+        }
+      }
+    }
+
+    &-button {
+      @include button-reset;
+      font-size: inherit;
+      font-family: inherit;
+      text-align: center;
+      color: var(--color-text);
+
+      @include respond($bp-md) {
+        text-align: left;
+      }
+
+      &-number {
+        display: block;
+        font-weight: 100;
+        font-size: 14px;
+
+        @include respond($bp-md) {
+          font-size: 12px;
+        }
+
+        @include respond($bp-lg) {
+          font-size: inherit;
+        }
+      }
+
+      &-text {
+        margin-top: 5px;
+        display: block;
+        position: relative;
+        font-size: 28px;
+        font-weight: 700;
+
+        @include respond($bp-md) {
+          font-size: 13px;
+          font-weight: inherit;
+          margin-top: 3px;
+        }
+
+        @include respond($bp-lg) {
+          font-size: inherit;
+          margin-top: 5px;
+        }
+
+        &::after {
+          background-color: var(--color-text);
+          display: none;
+          @include position(absolute, $right: -2px, $left: 0);
+          height: 1px;
+          transition: width .4s;
+          width: 0;
+          content: '';
+
+          @include respond($bp-md) {
+            display: block;
+          }
+        }
+
+        @at-root .header-nav-button:hover & {
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
