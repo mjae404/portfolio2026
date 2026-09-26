@@ -44,7 +44,7 @@ export const aboutDetails: AboutDetailSection[] = [
       },
       {
         date: "2014.06.27",
-        title: "컴퓨터그래픽스기능사",
+        title: "컴퓨터그래픽스운용기능사",
         info: "한국산업인력공단",
       },
       {
