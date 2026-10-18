@@ -1,6 +1,9 @@
 @use "../common/variables" as *;
 @use "../common/mixins" as *;
 
+// 맥북 해상도를 넘는 넓은 화면에서 좌우 끝에 붙은 요소가 벌어지지 않도록 콘텐츠 영역을 가운데로 제한
+$visual-side-offset: calc(max(0px, 50% - #{$max-width-wide * .5}));
+
 .visual {
   &-container {
     box-sizing: border-box;
@@ -44,7 +47,11 @@
       @include respond($bp-md) {
         top: 50%;
         transform: translateY(-50%);
-        left: 50px;
+        left: $inner-gap;
+      }
+
+      @include respond($bp-wide) {
+        left: calc(#{$inner-gap} + #{$visual-side-offset});
       }
 
       &.animate {
@@ -87,14 +94,17 @@
       @include respond($bp-md) {
         left: auto;
         right: 0;
-        top: $header-height;
-        transform: translateX(0);
+        transform: translateY(-50%);
         width: 60%;
       }
 
       @include respond($bp-lg) {
         width: 600px;
         height: auto;
+      }
+
+      @include respond($bp-wide) {
+        right: $visual-side-offset;
       }
 
       &.animate {
